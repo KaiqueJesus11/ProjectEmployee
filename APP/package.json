@@ -1,0 +1,26 @@
+{
+  "name": "projeto-employee",
+  "version": "1.0.0",
+  "description": "Projeto Employee",
+  "main": "index.js",
+  "dependencies": {
+    "expo-cli": "^3.4.1",
+    "react-native-cli": "^2.0.1",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaiqueJesus11/WebApi_Site_APP"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaiqueJesus11/WebApi_Site_APP/issues"
+  },
+  "homepage": "https://github.com/KaiqueJesus11/WebApi_Site_APP#readme"
+}
