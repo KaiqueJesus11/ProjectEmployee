@@ -12,7 +12,7 @@ import Axios from 'axios';
 
 const width = Dimensions.get('window').width
 
-const URL = 'https://localhost:44339/api/Employees'
+const URL = 'https://192.168.1.3:44339/api/Employees'
 
 export default class App extends React.Component {
 
