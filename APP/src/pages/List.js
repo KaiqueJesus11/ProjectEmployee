@@ -1,3 +1,5 @@
+
+
 import React from 'react'
 import axios from 'axios'
 import {
@@ -8,13 +10,11 @@ import {
   FlatList,
   Dimensions
 } from 'react-native';
-import Axios from 'axios';
 
 const width = Dimensions.get('window').width
+import api from '../services/api'
 
-const URL = 'http://192.168.1.3:44339/api/Employees'
-
-export default class App extends React.Component {
+export default class List extends React.Component {
 
   initialState = {
     data: [],
@@ -32,7 +32,7 @@ export default class App extends React.Component {
 
   _getLista() {
     this.setState({...this.state, isRefreshing : true})
-    axios.get(URL).then(response => {
+    api.get().then(response => {
       if (response.data) {
         this.setState({ ...this.state, data: response.data, isRefreshing : false})
       }

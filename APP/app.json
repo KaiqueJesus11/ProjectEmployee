@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Employee App",
-    "slug": "app",
+    "name": "App Employees",
+    "slug": "App",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
+    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
