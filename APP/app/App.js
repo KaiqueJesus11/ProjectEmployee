@@ -12,7 +12,7 @@ import Axios from 'axios';
 
 const width = Dimensions.get('window').width
 
-const URL = 'https://192.168.1.3:44339/api/Employees'
+const URL = 'http://192.168.1.3:44339/api/Employees'
 
 export default class App extends React.Component {
 
@@ -45,7 +45,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.texto}>Lista de funcionarios</Text>
+        <Text style={styles.texto}>Employees</Text>
         <SafeAreaView>
           <FlatList
             keyExtractor={(_, index) => index.toString()}
@@ -55,11 +55,11 @@ export default class App extends React.Component {
             renderItem={({ item }) => {
               return (
                 <View style={styles.item}>
-                  <Text style={styles.conteudo}>{item.EmployeeID}</Text>
-                  <Text style={styles.conteudo}>{item.Name}</Text>
-                  <Text style={styles.conteudo}>{item.Position}</Text>
-                  <Text style={styles.conteudo}>{item.age}</Text>
-                  <Text style={styles.conteudo}>{item.Salary}</Text>
+                  <Text style={styles.conteudo}>ID: {item.EmployeeID}</Text>
+                  <Text style={styles.conteudo}>Name: {item.Name}</Text>
+                  <Text style={styles.conteudo}>Position: {item.Position}</Text>
+                  <Text style={styles.conteudo}>Age: {item.age}</Text>
+                  <Text style={styles.conteudo}>Salary: {item.Salary}</Text>
                 </View>
               )
             }} />
@@ -78,19 +78,17 @@ const styles = StyleSheet.create({
     paddingTop: '15%'
   },
   conteudo: {
-    color: "#333333"
+    color: "#fff"
   },
   texto: {
-    alignItems: "center",
     fontSize: 30,
     margin: 20,
-    color: '#FF0000',
+    color: 'orange',
   },
   item: {
     width: width * 0.9,
-    alignItems: "center",
-    backgroundColor: "#dcdaD44",
+    backgroundColor: "orange",
     margin: 4,
-    padding: 20
+    padding: 20,
   }
 });
