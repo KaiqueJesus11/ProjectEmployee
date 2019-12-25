@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   StyleSheet,
   TouchableOpacity,
@@ -9,40 +9,18 @@ import {
   TextInput,
   Dimensions
 } from 'react-native';
-// import 'bootstrap'
-import api from '../services/api'
+
+import EmployeesList from '../components/EmployeesList'
 
 const width = Dimensions.get('window').width
 
-export default class List extends React.Component {
+export default function List (){
+const [names, setNames] = useState('');
 
-  initialState = {
-    data: [],
-    isRefreshing: false
-  }
+async function searchSubmit(){
+ <EmployeesList></EmployeesList>
+}
 
-  constructor(props) {
-    super(props)
-    this.state = this.initialState
-  }
-
-  componentDidMount() {
-      this._getLista()
-  }
-
-  _getLista() {
-    this.setState({...this.state, isRefreshing : true})
-    api.get().then(response => {
-      if (response.data) {
-        this.setState({ ...this.state, data: response.data, isRefreshing : false})
-      }
-    }).catch(error => {
-      console.log(error)
-      this.setState({...this.state, isRefreshing : false})
-    })
-  }
-
-  render() {
     return (
       <View style={styles.container}>
         <Text style={styles.texto}>Employees</Text>
@@ -50,35 +28,21 @@ export default class List extends React.Component {
         <SafeAreaView>
         <View style={styles.search}>
         <TextInput style={styles.input}
-                   placeholder="Input name"
+                   placeholder=" Input name"
                    placeholderTextColor="#999"
+                   value={names}
+                   onChangeText={setNames}
                    />
-          
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity  onPress={searchSubmit}  style={styles.button}>
           <Text style={styles.buttonText}>Search</Text>
           </TouchableOpacity>
           </View>
-          <FlatList
-            keyExtractor={(_, index) => index.toString()}
-            data={this.state.data}
-            refreshing={this.state.isRefreshing}
-            onRefresh={() => this._getLista()}
-            renderItem={({ item }) => {
-              return (
-                <View style={styles.item}>
-                  <Text style={styles.conteudo}>ID: {item.EmployeeID}</Text>
-                  <Text style={styles.conteudo}>Name: {item.Name}</Text>
-                  <Text style={styles.conteudo}>Position: {item.Position}</Text>
-                  <Text style={styles.conteudo}>Age: {item.age}</Text>
-                  <Text style={styles.conteudo}>Salary: {item.Salary}</Text>
-                </View>
-              )
-            }} />
+          
+          <EmployeesList Name={names}></EmployeesList>
         </SafeAreaView>
       </View>
     );
   }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -122,7 +86,7 @@ const styles = StyleSheet.create({
   texto: {
     fontSize: 30,
     margin: 20,
-    color: 'orange',
+    color: '#dcda48',
   },
   item: {
     width: width * 0.9,
