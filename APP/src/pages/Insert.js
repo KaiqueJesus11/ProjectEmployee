@@ -6,7 +6,9 @@ import {
   View,
   Alert,
   TextInput,
-  Dimensions
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native';
 
 const width = Dimensions.get('window').width
@@ -22,11 +24,12 @@ const [age, setAge] = useState('');
      }
      
 async function addEmployee() {
+    if(name != "" && position != "" && age !=  "" && salary != ""){
     const cont = {
-        "Name": name,//estado.nome
-        "Position": position,//estado.pos
-        "Age": age,//estado.idade
-        "Salary": salary//estado.salario
+        "Name": name,
+        "Position": position,
+        "Age": age,
+        "Salary": salary
     }
     await api.post('/Employees', cont)
     alert('Sucess!');
@@ -34,10 +37,13 @@ async function addEmployee() {
     setPosition("")
     setSalary("")
     setAge("")
+  }else{
+    alert('Fill in all fields!')
+  }
 
 }
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text style={styles.texto}>Employees</Text>
           <View style={styles.titleHead}>
             <Text style={styles.title}>Register new Employee</Text>
@@ -46,28 +52,28 @@ async function addEmployee() {
             </TouchableOpacity>
         </View>
         <View>
-        <Text style={styles.label}>Name:</Text>
+        <Text style={styles.label}>Name*:</Text>
         <TextInput style={styles.input}
                    placeholder=" Name"
                    placeholderTextColor="#999"
                    value={name}
                    onChangeText={setName}
                    />
-        <Text style={styles.label}>Position:</Text>
+        <Text style={styles.label}>Position*:</Text>
         <TextInput style={styles.input}
                    placeholder=" Position"
                    placeholderTextColor="#999"
                    value={position}
                    onChangeText={setPosition}
                    />
-        <Text style={styles.label}>Salary:</Text>        
+        <Text style={styles.label}>Salary*:</Text>        
         <TextInput style={styles.input}
                    placeholder=" Salary"
                    placeholderTextColor="#999"
                    value={salary}
                    onChangeText={setSalary}
                    />
-        <Text style={styles.label}>Age:</Text>
+        <Text style={styles.label}>Age*:</Text>
         <TextInput style={styles.input}
                    placeholder=" Age"
                    placeholderTextColor="#999"
@@ -79,7 +85,7 @@ async function addEmployee() {
       style={styles.buttonAdd}>
             <Text style={styles.buttonText}>Register</Text>
             </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     )
 }
 const styles = StyleSheet.create({

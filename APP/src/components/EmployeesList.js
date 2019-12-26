@@ -16,9 +16,33 @@ export default function EmployeesList(Name){
         loadEmployees()
     },[])   
 
-    async function deleteEmployee() {
-        await api.delete('/Employees?EmployeeID=',1 )
-        alert('Sucess!');    
+    if(Name != ""){
+        searchEmployee(Name.Name)
+    }
+    else{
+        const response = api.get('/Employees')
+        setEmployees(response.data)
+    }
+
+    async function searchEmployee(Name){
+       var alvo = employees;
+       var index;
+       for(var i in alvo){
+          if(alvo[i].Name == Name){
+             index = i;
+             break; // suspende o laço caso tenha encontrado uma ocorrência
+          }
+       }
+       if(employees[index] != undefined){
+           var newEmployees = employees[index]
+           console.log(newEmployees)
+       }
+    }
+    async function deleteEmployee(id) {
+        await api.delete(`/Employees/${id}`)
+        alert('Deleted!');
+        const response = await api.get('/Employees')
+        setEmployees(response.data)  
     }
     return(
         <View style={styles.container}>
@@ -39,7 +63,7 @@ export default function EmployeesList(Name){
             <View style = {styles. celPositionSalary}><Text>{item.Position}</Text></View>
             <View style = {styles. celPositionSalary}><Text>{item.Salary}</Text></View>
             <View style = {styles. celAge}><Text>{item.age}</Text></View>
-            <View style = {styles.celAction}><TouchableOpacity item={item.EmployeeID} onPress={deleteEmployee}><Text style = {styles.textDel}>Delete</Text></TouchableOpacity></View>
+            <View style = {styles.celAction}><TouchableOpacity onPress={() => deleteEmployee(item.EmployeeID)}><Text style = {styles.textDel}>Delete</Text></TouchableOpacity></View>
             </View>
         )}
        />
