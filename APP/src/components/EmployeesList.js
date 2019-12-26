@@ -1,24 +1,24 @@
 import React, {useEffect, useState} from 'react'
-import {View, Text, StyleSheet, FlatList} from 'react-native'
+import {View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions} from 'react-native'
+
 
 import api from '../services/api'
-import { green } from '@material-ui/core/colors'
+const width = Dimensions.get('window').width
 
 export default function EmployeesList(Name){
     const [employees, setEmployees] = useState([])
     useEffect(() => {
         async function loadEmployees(){
-            const response = await api.get('/Employees', {params: {Name}})
+            const response = await api.get('/Employees')
             setEmployees(response.data)
         }
         loadEmployees()
-    },[])
+    },[])   
+
 
     return(
         <View style={styles.container}>
-            <Text style={styles.title}>Employees List</Text>
         <View style = {styles.head}>
-        
         <View style = {styles.headCel}><Text style = {styles.listText}>Name</Text></View>
         <View style = {styles.headCel}><Text style = {styles.listText}>Position</Text></View>
         <View style = {styles.headCel}><Text style = {styles.listText}>Salary</Text></View>
@@ -43,27 +43,16 @@ export default function EmployeesList(Name){
 }
 
 const styles = StyleSheet.create({
-    container:{
-        marginHorizontal: 20
-    },
-    title:{
-        fontSize: 20,
-        color: '#444',
-        marginBottom: 15
-    },
     listItem:{
-        flexDirection: "row"
+        flexDirection: "row",
+        borderWidth: 0.6
     },
     cel:{
         justifyContent: "center",
         alignItems: "center",
-        borderStyle: 'solid',
-        borderWidth:1,
         height: 40,
-        width: 95.1,
+        width: width * 0.25 - 3.2,
         flexDirection: 'row',
-        borderLeftWidth:0.5,
-        borderBottomWidth:0.5
     },
     head:{
         backgroundColor: '#dcda48',
@@ -73,11 +62,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderStyle: 'solid',
-        borderWidth:1,
+        borderWidth:0.6,
         height: 40,
-        width: 95.1,
-        flexDirection: 'row',
-        borderLeftWidth:0.5,
-        borderBottomWidth:0.5
-    }
-})
+        width: width * 0.25 - 3.2,
+        flexDirection: 'row'
+    },
+  })

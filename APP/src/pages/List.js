@@ -14,30 +14,30 @@ import EmployeesList from '../components/EmployeesList'
 
 const width = Dimensions.get('window').width
 
-export default function List (){
+export default function List ({navigation}){
+  function addSubmit(){
+    navigation.navigate('Insert')
+ }
 const [names, setNames] = useState('');
-
-async function searchSubmit(){
- <EmployeesList></EmployeesList>
-}
-
     return (
       <View style={styles.container}>
         <Text style={styles.texto}>Employees</Text>
-        
-        <SafeAreaView>
         <View style={styles.search}>
         <TextInput style={styles.input}
-                   placeholder=" Input name"
+                   placeholder=" Search name"
                    placeholderTextColor="#999"
                    value={names}
                    onChangeText={setNames}
                    />
-          <TouchableOpacity  onPress={searchSubmit}  style={styles.button}>
-          <Text style={styles.buttonText}>Search</Text>
-          </TouchableOpacity>
           </View>
-          
+          <View style={styles.titleHead}>
+            <Text style={styles.title}>Employees List</Text>
+            <TouchableOpacity onPress={addSubmit} style={styles.button}>
+            <Text style={styles.buttonText}>Add</Text>
+            </TouchableOpacity>
+        </View>
+        
+        <SafeAreaView>
           <EmployeesList Name={names}></EmployeesList>
         </SafeAreaView>
       </View>
@@ -52,16 +52,35 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: '30%',
   },
-  conteudo: {
-    color: "#fff"
-  },
   search:{
     flexDirection: "row",
-    paddingHorizontal: 52,
+    paddingHorizontal: width * 0.13,
 
   },
+  head:{
+    backgroundColor: '#dcda48',
+    flexDirection: "row",
+},
+headCel:{
+    justifyContent: "center",
+    alignItems: "center",
+    borderStyle: 'solid',
+    borderWidth:0.6,
+    height: 40,
+    width: width * 0.25 - 3.2,
+    flexDirection: 'row'
+},
+titleHead:{
+    flexDirection: "row"
+},
+
+title:{
+  fontSize: width * 0.05,
+  color: '#444',
+  marginBottom: width * 0.015
+},
   input:{
-    width: width * 0.6,
+    width: width * 0.9,
     borderWidth: 1,
     borderColor: '#ddd',
     fontSize: 16,
@@ -77,22 +96,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius:4,
     width: width * 0.2,
+    marginLeft: width * 0.43
   },
   buttonText:{
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16
+    fontSize: width * 0.04,
   },
   texto: {
-    fontSize: 30,
-    margin: 20,
+    fontSize: width * 0.08,
+    margin: width * 0.04,
     color: '#dcda48',
-  },
-  item: {
-    width: width * 0.9,
-    backgroundColor: "orange",
-    margin: 4,
-    padding: 20,
-    paddingHorizontal: 20,
   }
 });
