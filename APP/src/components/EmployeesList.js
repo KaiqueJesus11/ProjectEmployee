@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {View, Text, StyleSheet, FlatList} from 'react-native'
 
 import api from '../services/api'
+import { green } from '@material-ui/core/colors'
 
 export default function EmployeesList(Name){
     const [employees, setEmployees] = useState([])
@@ -16,16 +17,23 @@ export default function EmployeesList(Name){
     return(
         <View style={styles.container}>
             <Text style={styles.title}>Employees List</Text>
+        <View style = {styles.head}>
+        
+        <View style = {styles.headCel}><Text style = {styles.listText}>Name</Text></View>
+        <View style = {styles.headCel}><Text style = {styles.listText}>Position</Text></View>
+        <View style = {styles.headCel}><Text style = {styles.listText}>Salary</Text></View>
+        <View style = {styles.headCel}><Text style = {styles.listText}>Age</Text></View>
+        </View>
         <FlatList
         style={styles.list}
         data={employees}
         keyExtractor={item => ''+item.EmployeeID}
         renderItem={({item}) => (
             <View style = {styles.listItem}>
-            <Text style = {styles.listText}> Name: {item.Name}</Text>
-            <Text style = {styles.listText}> Position: {item.Position}</Text>
-            <Text style = {styles.listText}> Salary: {item.Salary}</Text>
-            <Text style = {styles.listText}> Age: {item.age}</Text>
+            <View style = {styles.cel}><Text style = {styles.listText}>{item.Name}</Text></View>
+            <View style = {styles.cel}><Text style = {styles.listText}>{item.Position}</Text></View>
+            <View style = {styles.cel}><Text style = {styles.listText}>{item.Salary}</Text></View>
+            <View style = {styles.cel}><Text style = {styles.listText}>{item.age}</Text></View>
             </View>
         )}
        />
@@ -44,10 +52,32 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     listItem:{
+        flexDirection: "row"
+    },
+    cel:{
+        justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#dcda48",
-        flexGrow: 1,
-        margin: 4,
-        padding: 20
+        borderStyle: 'solid',
+        borderWidth:1,
+        height: 40,
+        width: 95.1,
+        flexDirection: 'row',
+        borderLeftWidth:0.5,
+        borderBottomWidth:0.5
+    },
+    head:{
+        backgroundColor: '#dcda48',
+        flexDirection: "row",
+    },
+    headCel:{
+        justifyContent: "center",
+        alignItems: "center",
+        borderStyle: 'solid',
+        borderWidth:1,
+        height: 40,
+        width: 95.1,
+        flexDirection: 'row',
+        borderLeftWidth:0.5,
+        borderBottomWidth:0.5
     }
 })

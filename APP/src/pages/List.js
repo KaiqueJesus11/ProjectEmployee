@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: '15%',
+    paddingTop: '30%',
   },
   conteudo: {
     color: "#fff"
   },
   search:{
     flexDirection: "row",
-    paddingHorizontal: 20,
+    paddingHorizontal: 52,
 
   },
   input:{
